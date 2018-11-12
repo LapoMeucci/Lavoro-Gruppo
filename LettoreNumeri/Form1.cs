@@ -12,19 +12,67 @@ namespace LettoreNumeri
 {
     public partial class Form1 : Form
     {
+        int[] vettore = new int[10];
+        int ll = 0;
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void Ordina_vettore (int [] vettore)
         {
-            Array.Sort(vettore);
+            for (int i = 0; i < vettore.Length; ++i)
+            {
+                for (int j = i + 1; j  < vettore.Length; ++j)
+                {
+                    if (vettore[j] < vettore[i])
+                    {
+                        int temp = vettore[j];
+                        vettore[j] = vettore[i];
+                        vettore[i] = temp;
+                    }
+                }
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            vettore[ll++] = Convert.ToInt32(textBox1.Text);
+            listBox1.Items.Add(textBox1.Text);
+            textBox1.Clear();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < vettore.Length; ++i)
+            {
+                for (int j = i + 1; j < vettore.Length; ++j)
+                {
+                    if (vettore[j] < vettore[i])
+                    {
+                        int temp = vettore[j];
+                        vettore[j] = vettore[i];
+                        vettore[i] = temp;
+                    }
+                }
+            }
+            listBox1.Items.Clear();
+
+            for (int i = (vettore.Length - ll); i < vettore.Length; i++)
+            {
+                listBox1.Items.Add(vettore[i]);
+            }
         }
     }
 }
