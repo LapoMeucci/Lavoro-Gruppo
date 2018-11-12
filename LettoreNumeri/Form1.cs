@@ -16,5 +16,15 @@ namespace LettoreNumeri
         {
             InitializeComponent();
         }
+
+        private void Ordina_vettore (int [] vettore)
+        {
+            Array.Sort(vettore);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
