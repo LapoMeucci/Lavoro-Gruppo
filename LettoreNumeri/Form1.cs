@@ -43,9 +43,16 @@ namespace LettoreNumeri
 
         private void button1_Click(object sender, EventArgs e)
         {
-            vettore[ll++] = Convert.ToInt32(textBox1.Text);
-            listBox1.Items.Add(textBox1.Text);
-            textBox1.Clear();
+            try
+            {
+                vettore[ll++] = Convert.ToInt32(textBox1.Text);
+                listBox1.Items.Add(textBox1.Text);
+                textBox1.Clear();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Formato non corretto");
+            }      
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,6 +79,27 @@ namespace LettoreNumeri
             for (int i = (vettore.Length - ll); i < vettore.Length; i++)
             {
                 listBox1.Items.Add(vettore[i]);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string text = "";
+            foreach (var item in listBox1.Items)
+            {
+                text += item.ToString() + ",";
+            }
+           
+            FileSystem.write("provalist2.txt", text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string lines = FileSystem.readFile("provalist2.txt");
+            string[] numeri = lines.Split(',');
+            for (int i = 0; i < numeri.Length; i++)
+            {
+                listBox1.Items.Add(numeri[i]);
             }
         }
     }
